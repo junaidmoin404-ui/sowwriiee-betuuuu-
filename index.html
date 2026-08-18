@@ -44,8 +44,8 @@ maff kr doo aurr ye button dbaa doo 😞😞👉👈🫂</p>
           <div class="modal-heart">💗</div>
           <h2>Maff kar rhee ho naa? 🥺💗</h2>
           <div class="modal-buttons">
-            <button class="cute-btn yes-btn" data-next="photos">Yes 💗</button>
-            <button class="cute-btn yes-btn" data-next="photos">Haan jaan bilkull 🫂💞</button>
+       <button class="cute-btn yes-btn" onclick="goToPhotos()">Yes 💗</button>
+<button class="cute-btn yes-btn" onclick="goToPhotos()">Haan jaan bilkull 🫂💞</button>
           </div>
         </div>
       </div>
@@ -78,3 +78,16 @@ maff kr doo aurr ye button dbaa doo 😞😞👉👈🫂</p>
   <script src="script.js"></script>
 </body>
 </html>
+function goToPhotos() {
+  const modal = document.getElementById("forgive-modal");
+
+  modal.classList.remove("show");
+
+  Object.values(screens).forEach(screen => {
+    screen.classList.remove("active");
+  });
+
+  screens.photos.classList.add("active");
+
+  startPhotoExperience();
+}
