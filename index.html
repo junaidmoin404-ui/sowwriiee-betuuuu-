@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#ffd9e6">
+  <title>For You, My Betuuu 💗</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main id="app">
+    <div id="ambient" aria-hidden="true"></div>
+
+    <section class="screen active" id="screen-opening">
+      <div class="glass opening-card">
+        <div class="tiny-heart">♡</div>
+        <p class="apology">sowwriiee ywrrr betuuu i loveeee youhh soo muchhhh
+gltii kii h mainee mujhee maff kr doo
+apkaa ho hunn absee kbhi nhii
+ye akhiri maukaa sambhalkee rkhungaa
+maff kr doo aurr ye button dbaa doo 😞😞👉👈🫂</p>
+        <button class="cute-btn pulse" data-next="letter">Ye button dbaa doo 🥺👉👈</button>
+      </div>
+    </section>
+
+    <section class="screen" id="screen-letter">
+      <div class="sorry-rain" aria-hidden="true"></div>
+      <div class="letter-wrap">
+        <div class="letter-top">forgive meee? 🥺💗</div>
+        <article class="paper">
+          <div class="paper-tape">💗</div>
+          <div class="letter-text">*Meriii pyariii betuuu 😓🛐💗🫂.... bohott saraa sowwriiee 🫠 aurr theenkuhhh bhii mujhsee  ye bohott bdii gltii ho gyii thiii abb dubaraa nhii krungaaa 🥺 allahh ksmm ek maukaa sa h mere pass ye hameshaa sambhlke rkhungaaa aurr kbhii kisi ko bhii Nhii msg krungaaa pakkaaaa promiseee haii....bss is baarr jaise kosis kr rhee h bhulne kii bhul jayee phirr dubara nhii hogaa ywrrr 🥺  🙏🏻.....aurr bohott bohott sukriyaaa aisaa honee ke baad bhii aapne mujhe chora Nhii mujhee mauka diyaa bohott saraa sukriyaaaa ywrrr 🥺🛐🫂..... Bohott regret hh lekinn maii isse yaad krungaa kii haan kbhii gltii Nhii krnii h  aurr inshallahh nhii hogaaa 🫂 bss yehinn h aapse maffii h aapka sukriyaaaa hh apnee mujhe change nhii kiyaa 🥺🥹💝❤️‍🩹🫂...... theenkuhh foreverr gratefull rhungaa iske liyeee 🥹❤️‍🩹..... bohottt jadaa sowwriieeee bohottt jadaaaaa behaddddd loveeeeeeeee youuuuhhh ywrrrr 🥹🥹🥺🥺🛐❤️‍🩹❤️‍🩹💗🫂🫂 ummmawahhh meriii jaaannaaaahhh meriii kucchu puchu meriii betuuu meriii bachiiii merii rasmalai meriii biwii jiiiiii meriii duniyaaaaaaa ywrrrr 🥹🥹❤️‍🩹💗🫂 🎀.....maff kr doo abb aurr plizz bss ek baarr bhul jaoo maii pura kosish krungaa kii aap bhul jao aur mere sathh khuss ho jaoo wapss 🫂 apke hii trahhh maii bhii Nhii reh sktaa 🫂*
+
+~Apkaa bhonduu 🛐🫂🥺</div>
+          <button class="cute-btn" id="forgive-open">Maff kar rhee ho naa? 🥺💗</button>
+        </article>
+      </div>
+
+      <div class="modal-backdrop" id="forgive-modal">
+        <div class="modal glass">
+          <div class="modal-heart">💗</div>
+          <h2>Maff kar rhee ho naa? 🥺💗</h2>
+          <div class="modal-buttons">
+            <button class="cute-btn yes-btn" data-next="photos">Yes 💗</button>
+            <button class="cute-btn yes-btn" data-next="photos">Haan jaan bilkull 🫂💞</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen photo-screen" id="screen-photos">
+      <div class="photo-glow"></div>
+      <div class="photo-stage">
+        <div class="photo-frame">
+          <img id="slide-image" src="photos/photo1.jpg" alt="Memory photo">
+        </div>
+        <div class="photo-dots" id="photo-dots"></div>
+      </div>
+      <div class="music-pill" id="music-pill">
+        <span id="music-status">🎵 Tap to play our song</span>
+        <button id="play-song">Play Song 💗</button>
+      </div>
+      <audio id="song" preload="metadata" src="song.mp3"></audio>
+    </section>
+
+    <section class="screen ending-screen" id="screen-ending">
+      <div class="matrix" id="matrix"></div>
+      <div class="final-card">
+        <div class="final-sparkle">✦</div>
+        <h1>I LOVE YOU <span>💗</span></h1>
+        <p>forever &amp; always 🥹🫂</p>
+      </div>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
