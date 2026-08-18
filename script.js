@@ -7,12 +7,18 @@ const screens = {
 
 const modal = document.getElementById("forgive-modal");
 
+/* =========================
+   SCREEN CONTROL
+========================= */
+
 function showScreen(name) {
   Object.values(screens).forEach(screen => {
     screen.classList.remove("active");
   });
 
-  screens[name].classList.add("active");
+  if (screens[name]) {
+    screens[name].classList.add("active");
+  }
 
   if (name === "photos") {
     startPhotoExperience();
@@ -23,27 +29,55 @@ function showScreen(name) {
   }
 }
 
-/* Opening → Letter */
-document
-  .querySelector('#screen-opening [data-next="letter"]')
-  .addEventListener("click", () => {
+
+/* =========================
+   OPENING → LETTER
+========================= */
+
+const openingButton =
+  document.querySelector('#screen-opening [data-next="letter"]');
+
+if (openingButton) {
+  openingButton.addEventListener("click", () => {
     showScreen("letter");
   });
+}
 
-/* Letter → Popup */
-document.getElementById("forgive-open").addEventListener("click", () => {
-  modal.classList.add("show");
-});
 
-/* Popup → Photos */
-modal.querySelectorAll('[data-next="photos"]').forEach(button => {
+/* =========================
+   LETTER → POPUP
+========================= */
+
+const forgiveButton =
+  document.getElementById("forgive-open");
+
+if (forgiveButton) {
+  forgiveButton.addEventListener("click", () => {
+    modal.classList.add("show");
+  });
+}
+
+
+/* =========================
+   POPUP → PHOTOS
+========================= */
+
+const photoButtons =
+  modal.querySelectorAll('[data-next="photos"]');
+
+photoButtons.forEach(button => {
   button.addEventListener("click", () => {
+
     modal.classList.remove("show");
+
     showScreen("photos");
+
   });
 });
 
+
 /* Close popup by clicking outside */
+
 modal.addEventListener("click", event => {
   if (event.target === modal) {
     modal.classList.remove("show");
@@ -63,13 +97,20 @@ const photos = [
   "photos/photo5.jpg"
 ];
 
-const img = document.getElementById("slide-image");
-const dots = document.getElementById("photo-dots");
+const img =
+  document.getElementById("slide-image");
+
+const dots =
+  document.getElementById("photo-dots");
 
 let slideIndex = 0;
 let slideTimer = null;
 
+
+/* Create dots */
+
 photos.forEach((_, index) => {
+
   const dot = document.createElement("i");
 
   if (index === 0) {
@@ -77,12 +118,16 @@ photos.forEach((_, index) => {
   }
 
   dots.appendChild(dot);
+
 });
 
+
 function renderSlide(index) {
+
   img.classList.add("fade");
 
   setTimeout(() => {
+
     img.src = photos[index];
 
     img.onload = () => {
@@ -92,13 +137,23 @@ function renderSlide(index) {
     document
       .querySelectorAll(".photo-dots i")
       .forEach((dot, i) => {
-        dot.classList.toggle("on", i === index);
+        dot.classList.toggle(
+          "on",
+          i === index
+        );
       });
 
   }, 300);
 }
 
+
 function startPhotoExperience() {
+
+  /* Show first photo immediately */
+
+  img.src = photos[0];
+
+  /* Don't create multiple timers */
 
   if (slideTimer) {
     return;
@@ -106,7 +161,8 @@ function startPhotoExperience() {
 
   slideTimer = setInterval(() => {
 
-    slideIndex = (slideIndex + 1) % photos.length;
+    slideIndex =
+      (slideIndex + 1) % photos.length;
 
     renderSlide(slideIndex);
 
@@ -118,17 +174,28 @@ function startPhotoExperience() {
    MUSIC
 ========================= */
 
-const audio = document.getElementById("song");
-const playButton = document.getElementById("play-song");
-const status = document.getElementById("music-status");
+const audio =
+  document.getElementById("song");
 
-const START = 137; // 2:17
-const END = 177;   // 2:57
+const playButton =
+  document.getElementById("play-song");
+
+const status =
+  document.getElementById("music-status");
+
+
+/*
+  2:17 = 137 seconds
+  2:57 = 177 seconds
+*/
+
+const START = 137;
+const END = 177;
 
 let audioTimer = null;
 
 
-/* Play only 2:17 → 2:57 */
+/* Play ONLY 2:17 → 2:57 */
 
 function playFrom137() {
 
@@ -154,22 +221,63 @@ function playFrom137() {
 
   });
 
+
+  /*
+    Backup timer:
+    40 seconds = 2:17 → 2:57
+  */
+
   audioTimer = setTimeout(() => {
 
-    audio.pause();
+    finishSong();
 
-    audio.currentTime = END;
+  }, (END - START) * 1000);
 
-    playButton.style.display = "none";
+}
 
-    status.textContent =
-      "💗 Our little song is finished";
+
+/* Stop exactly at 2:57 */
+
+audio.addEventListener("timeupdate", () => {
+
+  if (audio.currentTime >= END) {
+
+    finishSong();
+
+  }
+
+});
+
+
+function finishSong() {
+
+  clearTimeout(audioTimer);
+
+  audioTimer = null;
+
+  audio.pause();
+
+  audio.currentTime = END;
+
+  playButton.style.display = "none";
+
+  status.textContent =
+    "💗 Our little song is finished";
+
+  /*
+    Small pause before final Matrix screen
+  */
+
+  setTimeout(() => {
 
     showScreen("ending");
 
-  }, (END - START) * 1000);
+  }, 500);
+
 }
 
+
+/* Play button */
 
 playButton.addEventListener(
   "click",
@@ -177,30 +285,7 @@ playButton.addEventListener(
 );
 
 
-/* Safety: stop exactly at 2:57 */
-
-audio.addEventListener("timeupdate", () => {
-
-  if (audio.currentTime >= END) {
-
-    audio.pause();
-
-    audio.currentTime = END;
-
-    clearTimeout(audioTimer);
-
-    playButton.style.display = "none";
-
-    status.textContent =
-      "💗 Our little song is finished";
-
-    showScreen("ending");
-  }
-
-});
-
-
-/* Audio missing/error */
+/* Audio error */
 
 audio.addEventListener("error", () => {
 
@@ -214,7 +299,7 @@ audio.addEventListener("error", () => {
 
 
 /* =========================
-   FINAL MATRIX
+   MATRIX ENDING
 ========================= */
 
 function makeMatrix() {
@@ -229,6 +314,7 @@ function makeMatrix() {
       9,
       Math.floor(window.innerWidth / 70)
     );
+
 
   for (let i = 0; i < count; i++) {
 
@@ -247,6 +333,7 @@ function makeMatrix() {
     column.style.animationDelay =
       `${-Math.random() * 8}s`;
 
+
     for (let j = 0; j < 14; j++) {
 
       const span =
@@ -255,21 +342,34 @@ function makeMatrix() {
       const random =
         Math.random();
 
+
       if (random < 0.55) {
-        span.textContent = "I LOVE YOU";
+
+        span.textContent =
+          "I LOVE YOU";
+
       } else if (random < 0.78) {
+
         span.textContent = "♥";
+
       } else if (random < 0.9) {
+
         span.textContent = "♡";
+
       } else {
+
         span.textContent = "🤍";
+
       }
 
       column.appendChild(span);
+
     }
 
     matrix.appendChild(column);
+
   }
+
 }
 
 
@@ -280,7 +380,9 @@ window.addEventListener("resize", () => {
   if (
     screens.ending.classList.contains("active")
   ) {
+
     makeMatrix();
+
   }
 
 });
